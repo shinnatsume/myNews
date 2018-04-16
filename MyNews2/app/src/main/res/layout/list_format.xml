@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/image_news"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="16dp"/>
+
+
+            <TextView
+                android:id="@+id/title_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/image_news"
+                android:layout_toRightOf="@+id/image_news"
+                tools:text="title" />
+
+            <TextView
+                android:id="@+id/date_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/title_news"
+                tools:text="date" />
+
+            <TextView
+                android:id="@+id/resume_text_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_news"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:layout_toRightOf="@+id/image_news"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque ac nisi eu lobortis. Nulla non dignissim sem, vitae rutrum nibh. Praesent lobortis finibus neque, in tincidunt enim semper quis. Praesent in augue vitae eros venenatis consequat vitae ac massa. Phasellus scelerisque posuere massa, vel consectetur quam imperdiet et. Morbi ut maximus purus. Nam nec velit ac dolor mattis bibendum. Aenean dignissim quam non faucibus placerat. Aliquam id volutpat sem. In ut viverra dolor. Vivamus vel porta nisl. Morbi odio sem, pharetra congue diam et, vulputate malesuada ex. Cras aliquam velit a ex efficitur congue. " />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
