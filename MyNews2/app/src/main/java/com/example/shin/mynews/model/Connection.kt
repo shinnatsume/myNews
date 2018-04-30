@@ -16,6 +16,6 @@ class Connection {
             .build()
 
 
-    val newsService : NewsService = retrofit.create(NewsService::class.java)
+    val newsServiceJson  = retrofit.create(NewsService::class.java)
     }
 }

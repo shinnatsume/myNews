@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.example.shin.mynews.R
 import com.example.shin.mynews.adapter.NewsRecyclerViewAdapter
 import com.example.shin.mynews.model.Connection
 import com.example.shin.mynews.model.News
-import com.example.shin.mynews.model.NewsService
+import com.example.shin.mynews.model.Results
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,19 +21,11 @@ import retrofit2.Response
 class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
 
 
-    private val API_KEY = "7c6d8c349be64838b6b23fc10989e992"
-
-
     override fun onNewsSelected(news: News) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
-
     lateinit  var newsList : MutableList<News>
-
-
-
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: NewsRecyclerViewAdapter
 
@@ -50,30 +43,55 @@ class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val call = Connection.newsService.getTopStories(API_KEY)
-        call.enqueue(object :Callback<News>{
+
+        newsList = mutableListOf<News>()
+
+
+        val call = Connection.newsServiceJson.getTopStories()
+        call.enqueue(object : Callback<News>{
+
             override fun onFailure(call: Call<News>?, t: Throwable?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                Log.e("conection", "connection not ok",t)
             }
 
-            override fun onResponse(call: Call<News>, response: Response<News>?) {
-                for (i in 1..50){
-                    response!!.body()?.let { newsList .add(it) }
-                }        }
+            override fun onResponse(call: Call<News>, response: Response<News>) {
+
+//               newsList.add(response?.body()!!)
+//                Log.i("conection", "connection ok : ${newsList[1].results[1].title}")
+//                Log.i("conection", "connection ok : ${response?.body()}")
+                response.body()!!.results.let { getReponce(it) }
+
+            }
+
 
         })
+
+            print(newsList.size)
         adapter = NewsRecyclerViewAdapter(newsList,this)
+
         recyclerView.adapter = adapter
+
     }
+
+    private fun getReponce(results: Results):Any {
+
+        newsList.add(News(results = results))
+        Log.i("conection", "connection ok : ${newsList.size}")
+        return newsList
+    }
+
+
+
     companion object {
 
         //Create keys for our Bundle
         private val KEY_POSITION = "position"
         private val KEY_COLOR = "color"
+        private  val KEY_TiTLE ="title"
 
 
         //Method that will create a new instance of PageFragment, and add data to its bundle.
-        fun newInstance(position: Int, color: Int): PageFragment {
+        fun newInstance(position: Int, title : String): PageFragment {
 
             //Create new fragment
             val frag = PageFragment()
@@ -81,7 +99,8 @@ class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
             //Create bundle and add it some data
             val args = Bundle()
             args.putInt(KEY_POSITION, position)
-            args.putInt(KEY_COLOR, color)
+            args.putString(KEY_TiTLE,title)
+//            args.putInt(KEY_COLOR, color)
             frag.arguments = args
 
             return frag
