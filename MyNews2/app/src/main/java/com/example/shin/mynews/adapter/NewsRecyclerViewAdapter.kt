@@ -21,9 +21,9 @@ class NewsRecyclerViewAdapter(private val news: List<News>, private val newsList
     }
 
     override fun onClick(view: View) {
-//       when (view.id){
-//           R.id.card_view -> newsListener.onNewsSelected(view.tag as News)
-//       }
+       when (view.id){
+           R.id.card_view -> newsListener.onNewsSelected(view.tag as News)
+       }
     }
 
     class ViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
@@ -48,12 +48,11 @@ class NewsRecyclerViewAdapter(private val news: List<News>, private val newsList
         with(holder){
             cardView.tag = newsList
             cardView.setOnClickListener(this@NewsRecyclerViewAdapter)
-            titleView.text = newsList.results.title
-            dateNews.text = newsList.results.updateDate
-            textNews.text = newsList.results.urlArticle
-
+            titleView.text = newsList.results[position].title
+            dateNews.text = newsList.results[position].updateDate
+            textNews.text = newsList.results[position].urlArticle
         }
-        print(newsList.results.title)
+        print(newsList.results[position].title)
 
 
     }

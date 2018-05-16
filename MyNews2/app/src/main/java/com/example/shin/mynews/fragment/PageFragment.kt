@@ -13,6 +13,7 @@ import com.example.shin.mynews.adapter.NewsRecyclerViewAdapter
 import com.example.shin.mynews.model.Connection
 import com.example.shin.mynews.model.News
 import com.example.shin.mynews.model.Results
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +26,7 @@ class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    lateinit  var newsList : MutableList<News>
+    lateinit var newsList : MutableList<News>
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: NewsRecyclerViewAdapter
 
@@ -48,37 +49,38 @@ class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
 
 
         val call = Connection.newsServiceJson.getTopStories()
+
         call.enqueue(object : Callback<News>{
 
+            override fun onResponse(call: Call<News>?, response: Response<News>?) {
+//                Log.i("connect","connect${response?.body()}")
+               
+            }
+
             override fun onFailure(call: Call<News>?, t: Throwable?) {
-                Log.e("conection", "connection not ok",t)
+                Log.e("t","not connect$t")
             }
 
-            override fun onResponse(call: Call<News>, response: Response<News>) {
 
-//               newsList.add(response?.body()!!)
-//                Log.i("conection", "connection ok : ${newsList[1].results[1].title}")
-//                Log.i("conection", "connection ok : ${response?.body()}")
-                response.body()!!.results.let { getReponce(it) }
-
-            }
 
 
         })
 
-            print(newsList.size)
+        Log.i("size liste", "size$newsList.size")
         adapter = NewsRecyclerViewAdapter(newsList,this)
-
         recyclerView.adapter = adapter
 
     }
 
-    private fun getReponce(results: Results):Any {
 
-        newsList.add(News(results = results))
-        Log.i("conection", "connection ok : ${newsList.size}")
-        return newsList
-    }
+
+
+//    private fun getReponce(results: Results):Any {
+//
+//        newsList.add(News(results = results))
+//        Log.i("conection", "connection ok : ${newsList.size}")
+//        return newsList
+//    }
 
 
 
