@@ -12,7 +12,6 @@ import com.example.shin.mynews.R
 import com.example.shin.mynews.adapter.NewsRecyclerViewAdapter
 import com.example.shin.mynews.model.Connection
 import com.example.shin.mynews.model.News
-import com.example.shin.mynews.model.Results
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +19,21 @@ import retrofit2.Response
 
 
 class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
+
+//    override fun onResponse(response: News) {
+//        this.updateList(response)
+//        Log.e("responce","$response")
+//    }
+//
+//    private fun updateList(response: News): MutableList<News> {
+//        newsList = mutableListOf<News>()
+//        newsList.add(response)
+//        return newsList
+//    }
+
+//    override fun onFailure() {
+//        Log.e("t","not connect")
+//    }
 
 
     override fun onNewsSelected(news: News) {
@@ -53,8 +67,13 @@ class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
         call.enqueue(object : Callback<News>{
 
             override fun onResponse(call: Call<News>?, response: Response<News>?) {
-//                Log.i("connect","connect${response?.body()}")
-               
+                Log.i("connect","connect${response?.body()}")
+
+                val news = response?.body()
+
+                adapter = NewsRecyclerViewAdapter(news!!.results,this)
+                recyclerView.adapter = adapter
+
             }
 
             override fun onFailure(call: Call<News>?, t: Throwable?) {
@@ -62,25 +81,16 @@ class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
             }
 
 
-
-
         })
 
-        Log.i("size liste", "size$newsList.size")
-        adapter = NewsRecyclerViewAdapter(newsList,this)
-        recyclerView.adapter = adapter
+
+
 
     }
 
 
 
 
-//    private fun getReponce(results: Results):Any {
-//
-//        newsList.add(News(results = results))
-//        Log.i("conection", "connection ok : ${newsList.size}")
-//        return newsList
-//    }
 
 
 
@@ -110,3 +120,7 @@ class PageFragment : Fragment() , NewsRecyclerViewAdapter.NewsItemListener{
     }
 
 }
+
+//private fun <News> Callback<News>.updateNews(response: Response<News>) {
+//    var list = mutableListOf<News>(response.body()!!)
+//}

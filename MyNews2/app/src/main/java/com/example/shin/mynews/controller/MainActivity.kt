@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         news= mutableListOf<News>()
 //
-//        val  tabLayout= findViewById(R.id.activity_main_tabs) as TabLayout
+//        val  tabLayout= findViewById(R.id.activity_main_tabs) as TableLayout
 //      this.confugureViewPager()
 
         pageFragment = PageFragment()
@@ -33,22 +33,22 @@ class MainActivity : AppCompatActivity() {
 
 //    private fun confugureViewPager() {
 //        //Get ViewPager from layout
-//        val pager = findViewById(R.id.container) as ViewPager
+//        val pager = findViewById(R.id.viewPager) as ViewPager
 //        //Set Adapter PageAdapter and glue it together
 //        pager.adapter = object : PageAdapter(mgr = supportFragmentManager, title = tabs) {
-//
-//
-//            // 1 - Get TabLayout from layout
-//
-//            val  tabLayout= findViewById(R.id.activity_main_tabs) as TabLayout
-//
-//            // 2 - Glue TabLayout and ViewPager together
-//
-//         //   tabLayout.setupWithViewPager(pager)
-//
-//            // 3 - Design purpose. Tabs have the same width
-//
-//          //  tabLayout.setTabMode(TabLayout.MODE_FIXED)
+
+
+            // 1 - Get TabLayout from layout
+
+//            val  tabLayout= findViewById(R.id.activity_main_tabs) as TableLayout
+
+            // 2 - Glue TabLayout and ViewPager together
+
+//            tabLayout.setupWithViewPager(pager)
+
+            // 3 - Design purpose. Tabs have the same width
+
+          //  tabLayout.setTabMode(TabLayout.MODE_FIXED)
 //        }
 //    }
 }

@@ -11,10 +11,13 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import com.example.shin.mynews.model.News
 import com.example.shin.mynews.R
-import com.example.shin.mynews.fragment.PageFragment
+import com.example.shin.mynews.model.Results
+import retrofit2.Callback
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class NewsRecyclerViewAdapter(private val news: List<News>, private val newsListener: PageFragment) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
+class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsListener: Callback<News>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
 
     interface NewsItemListener{
         fun onNewsSelected(news: News)
@@ -22,21 +25,22 @@ class NewsRecyclerViewAdapter(private val news: List<News>, private val newsList
 
     override fun onClick(view: View) {
        when (view.id){
-           R.id.card_view -> newsListener.onNewsSelected(view.tag as News)
+//           R.id.card_view -> newsListener.onNewsSelected(view.tag as News)
        }
     }
 
     class ViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
         val cardView = itemView.findViewById<CardView>(R.id.card_view) !!
 //        val imageNews = cardView.findViewById(R.id.image_news) as ImageView
-        val titleView = itemView.findViewById<TextView>(R.id.title_news) !!
+        val sectionView = itemView.findViewById<TextView>(R.id.section_news) !!
         val dateNews = itemView.findViewById<TextView>(R.id.date_news) !!
-        val textNews = itemView.findViewById<TextView>(R.id.resume_text_news) !!
+        val titleNews = itemView.findViewById<TextView>(R.id.title_news) !!
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val viewItem = LayoutInflater.from(parent.context)
-               .inflate(R.layout.fragment_page, parent,false)
+               .inflate(R.layout.list_format, parent,false)
         return ViewHolder(viewItem)
     }
 
@@ -44,15 +48,19 @@ class NewsRecyclerViewAdapter(private val news: List<News>, private val newsList
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+//        val format: String = "dd/mm/YYYY"
+//       var simpleDateFormat = SimpleDateFormat(format, Locale.FRANCE)
+//       var currentDate = simpleDateFormat.format(news[position].updateDate)
+
         val newsList = news[position]
         with(holder){
             cardView.tag = newsList
             cardView.setOnClickListener(this@NewsRecyclerViewAdapter)
-            titleView.text = newsList.results[position].title
-            dateNews.text = newsList.results[position].updateDate
-            textNews.text = newsList.results[position].urlArticle
+            sectionView.text = "${newsList.section} ->  ${newsList.subsection}"
+            dateNews.text = newsList.updateDate
+            titleNews.text = newsList.title
         }
-        print(newsList.results[position].title)
+
 
 
     }
