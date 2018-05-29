@@ -3,20 +3,25 @@ package com.example.shin.mynews.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.example.shin.mynews.fragment.PageFragment
+import com.example.shin.mynews.controller.fragment.PageFragment
 
 
-open class PageAdapter
-//Default Constructor
-(mgr: FragmentManager,
+class PageAdapter(fm: FragmentManager, tabCount: Int) : FragmentPagerAdapter(fm) {
 
- private val title: Array<Int>) : FragmentPagerAdapter(mgr) {
-    override fun getCount(): Int {
-        return 3 //Number of page to show
+
+
+    override fun getItem(position: Int): Fragment? {
+        when(position)
+        {
+            0 -> return PageFragment.newInctance(position)
+            1 -> return PageFragment.newInctance(position)
+            2 -> return PageFragment.newInctance(position)
+
+        }
+        return null
     }
 
-    override fun getItem(position: Int): Fragment {
-        //Item to return
-        return PageFragment.newInstance(position, this.title[position].toString())
+    override fun getCount(): Int {
+        return 3
     }
 }

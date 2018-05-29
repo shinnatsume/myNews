@@ -2,19 +2,16 @@ package com.example.shin.mynews.adapter
 
 
 import android.support.v7.widget.CardView
-import android.view.View
-import android.view.ViewGroup
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
-
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import com.example.shin.mynews.model.News
 import com.example.shin.mynews.R
+import com.example.shin.mynews.model.News
 import com.example.shin.mynews.model.Results
 import retrofit2.Callback
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsListener: Callback<News>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {

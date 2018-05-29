@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 
 data class News(
-       @SerializedName("results") val results : MutableList<Results>
-        )
+        @SerializedName("results") val results : MutableList<Results>
+)

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.fragment.SearchAndNotificationFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/Search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            android:layout_alignParentTop="true"
+            android:text="Search query term" />
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="114dp"
+            android:ems="10"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+
+            android:layout_alignTop="@+id/editText"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editText"
+
+            android:layout_marginBottom="-114dp"
+            android:text="begin date" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editText"
+
+            android:layout_marginBottom="-114dp"
+            android:text="End date" />
+
+
+        <CheckBox
+            android:id="@+id/art"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignTop="@+id/travel"
+            android:text="art" />
+
+        <CheckBox
+            android:id="@+id/business"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/art"
+            android:text="business" />
+
+        <CheckBox
+            android:id="@+id/entrepreneurs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/business"
+            android:text="entrepreneurs" />
+
+        <CheckBox
+            android:id="@+id/politics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/business"
+            android:text="politics" />
+
+        <CheckBox
+            android:id="@+id/sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/art"
+            android:text="sport" />
+
+        <CheckBox
+            android:id="@+id/travel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            android:layout_marginTop="177dp"
+            android:text="travel" />
+
+        <Button
+            android:id="@+id/Search_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+
+            android:layout_marginBottom="121dp"
+            android:text="SEARCH" />
+
+        <Switch
+            android:id="@+id/notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/Search"
+            android:layout_marginTop="-121dp"
+            android:text="enable notification (once per day)" />
+
+    </RelativeLayout>
+
+</FrameLayout>
