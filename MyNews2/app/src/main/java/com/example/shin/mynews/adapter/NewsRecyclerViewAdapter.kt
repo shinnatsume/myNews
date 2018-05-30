@@ -1,20 +1,28 @@
 package com.example.shin.mynews.adapter
 
 
+
+import android.content.Context
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.shin.mynews.R
 import com.example.shin.mynews.model.News
 import com.example.shin.mynews.model.Results
+
 import retrofit2.Callback
+
+import com.example.shin.mynews.R.id.imageView
+import com.squareup.picasso.Picasso
 
 
 class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsListener: Callback<News>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
+
 
     interface NewsItemListener{
         fun onNewsSelected(news: News)
@@ -27,8 +35,9 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
     }
 
     class ViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
+        val context = itemView.context
         val cardView = itemView.findViewById<CardView>(R.id.card_view) !!
-//        val imageNews = cardView.findViewById(R.id.image_news) as ImageView
+        val imageNews = cardView.findViewById(R.id.image_news) as ImageView
         val sectionView = itemView.findViewById<TextView>(R.id.section_news) !!
         val dateNews = itemView.findViewById<TextView>(R.id.date_news) !!
         val titleNews = itemView.findViewById<TextView>(R.id.title_news) !!
@@ -48,14 +57,25 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
 //        val format: String = "dd/mm/YYYY"
 //       var simpleDateFormat = SimpleDateFormat(format, Locale.FRANCE)
 //       var currentDate = simpleDateFormat.format(news[position].updateDate)
-
         val newsList = news[position]
+
         with(holder){
             cardView.tag = newsList
             cardView.setOnClickListener(this@NewsRecyclerViewAdapter)
-            sectionView.text = "${newsList.section} ->  ${newsList.subsection}"
+
+            if (newsList.multimedia?.first()?.url != null){
+                           Picasso.with(context).load(newsList.multimedia?.first()?.url).into(holder.imageNews)
+            }
+
+            if (newsList.subsection == null || newsList.subsection.isEmpty()){
+                sectionView.text = newsList.section
+            }else if(newsList.subsection != null){
+                sectionView.text = "${newsList.section} ->  ${newsList.subsection}"
+            }
+
             dateNews.text = newsList.updateDate
             titleNews.text = newsList.title
+
         }
 
 
@@ -67,3 +87,4 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
         return news.size
     }
 }
+

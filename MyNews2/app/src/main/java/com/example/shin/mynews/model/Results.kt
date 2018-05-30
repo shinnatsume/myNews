@@ -8,5 +8,6 @@ data class Results(
         @SerializedName("title") val title : String,
         @SerializedName("url") val urlArticle : String,
         @SerializedName("byline") val byline : String,
-        @SerializedName("updated_date") val updateDate :String
+        @SerializedName("updated_date") val updateDate :String,
+        @SerializedName("multimedia") val multimedia:  MutableList<Multimedia>
 )
