@@ -1,7 +1,7 @@
 package com.example.shin.mynews.controller.fragment
 
-import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.TabItem
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.shin.mynews.R
 import com.example.shin.mynews.adapter.NewsRecyclerViewAdapter
-import com.example.shin.mynews.model.Connection
-import com.example.shin.mynews.model.News
+import com.example.shin.mynews.model.connectionAndServices.Connection
+import com.example.shin.mynews.model.dataClass.News
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,81 +49,31 @@ class PageFragment: Fragment(), NewsRecyclerViewAdapter.NewsItemListener{
 
 
 
-//        lateinit var call : Call<News>
+
         val position = this.arguments?.getSerializable(ARG_POSITION)
        if (position == 0 ){
+
            val call = Connection.newsServiceJson.getTopStories()
-
-           call.enqueue(object : Callback<News>{
-
-               override fun onResponse(call: Call<News>?, response: Response<News>?) {
-                   Log.i("connect","connect${response?.body()}")
-
-                   val news = response?.body()
-
-                   adapter = NewsRecyclerViewAdapter(news!!.results,this)
-                   recyclerView.adapter = adapter
-
-               }
-
-               override fun onFailure(call: Call<News>?, t: Throwable?) {
-                   Log.e("t","not connect$t")
-               }
-
-           })
+           responce(call)
        }
        else if (position == 1){
           val call = Connection.newsServiceJson.getMostPopular()
-
-           call.enqueue(object : Callback<News>{
-
-               override fun onResponse(call: Call<News>?, response: Response<News>?) {
-                   Log.i("connect","connect${response?.body()}")
-
-                   val news = response?.body()
-
-                   adapter = NewsRecyclerViewAdapter(news!!.results,this)
-                   recyclerView.adapter = adapter
-
-               }
-
-               override fun onFailure(call: Call<News>?, t: Throwable?) {
-                   Log.e("t","not connect$t")
-               }
-
-           })
+           responce(call)
        }
 //       else if (position == 2 ){
 //          val call = Connection.newsServiceJson.getArticleSearch()
-//
-//           call.enqueue(object : Callback<News>{
-//
-//               override fun onResponse(call: Call<News>?, response: Response<News>?) {
-//                   Log.i("connect","connect${response?.body()}")
-//
-//                   val news = response?.body()
-//
-//                   adapter = NewsRecyclerViewAdapter(news!!.results,this)
-//                   recyclerView.adapter = adapter
-//
-//               }
-//
-//               override fun onFailure(call: Call<News>?, t: Throwable?) {
-//                   Log.e("t","not connect$t")
-//               }
-//
-//           })
+//             responce(call)
 //       }
 
 
 
     }
-
+/**
+ * create new instance of fragment
+ * */
     companion object {
 
         val ARG_POSITION = " TAB_POSITION"
-
-
 
         fun newInctance(position: Int): Fragment {
             val  fragment = PageFragment()
@@ -136,5 +86,28 @@ class PageFragment: Fragment(), NewsRecyclerViewAdapter.NewsItemListener{
 
     }
 
+
+    /**
+     * funtion for call retrofit enqueue and display responce on recyclerview
+     * */
+    fun responce(call: Call<News>?) {
+        call?.enqueue(object : Callback<News> {
+
+            override fun onResponse(call: Call<News>?, response: Response<News>?) {
+                Log.i("connect", "connect${response?.body()}")
+
+                val news = response?.body()
+
+                adapter = NewsRecyclerViewAdapter(news!!.results, this)
+                recyclerView.adapter = adapter
+
+            }
+
+            override fun onFailure(call: Call<News>?, t: Throwable?) {
+                Log.e("t", "not connect$t")
+            }
+
+        })
+    }
 }
 

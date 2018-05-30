@@ -28,20 +28,17 @@
         <android.support.design.widget.TabItem
             android:id="@+id/top_stories_tab"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="top stories"/>
+            android:layout_height="wrap_content" />
 
         <android.support.design.widget.TabItem
             android:id="@+id/most_popular_tab"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="most popular"/>
+            android:layout_height="wrap_content"/>
 
         <android.support.design.widget.TabItem
             android:id="@+id/search_tab"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="search"/>
+            android:layout_height="wrap_content"/>
 
     </android.support.design.widget.TabLayout>
 

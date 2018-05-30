@@ -1,4 +1,4 @@
-package com.example.shin.mynews.model
+package com.example.shin.mynews.model.connectionAndServices
 
 
 

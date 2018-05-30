@@ -1,5 +1,7 @@
-package com.example.shin.mynews.model
+package com.example.shin.mynews.model.dataClass
 
+import com.example.shin.mynews.model.dataClass.Media
+import com.example.shin.mynews.model.dataClass.Multimedia
 import com.google.gson.annotations.SerializedName
 
 data class Results(
@@ -9,5 +11,7 @@ data class Results(
         @SerializedName("url") val urlArticle : String,
         @SerializedName("byline") val byline : String,
         @SerializedName("updated_date") val updateDate :String,
-        @SerializedName("multimedia") val multimedia:  MutableList<Multimedia>
+        @SerializedName("published_date") val publishedDate : String,
+        @SerializedName("multimedia") val multimedia:  MutableList<Multimedia>,
+        @SerializedName("media") val media: MutableList<Media>
 )

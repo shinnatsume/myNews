@@ -1,5 +1,6 @@
-package com.example.shin.mynews.model
+package com.example.shin.mynews.model.connectionAndServices
 
+import com.example.shin.mynews.model.dataClass.News
 import retrofit2.Call
 import retrofit2.http.GET
 

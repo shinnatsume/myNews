@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.example.shin.mynews.controller.fragment.PageFragment
 
 
-class PageAdapter(fm: FragmentManager, tabCount: Int) : FragmentPagerAdapter(fm) {
+class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
 
 

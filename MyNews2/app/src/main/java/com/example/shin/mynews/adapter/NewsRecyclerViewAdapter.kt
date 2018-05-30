@@ -2,7 +2,7 @@ package com.example.shin.mynews.adapter
 
 
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -12,13 +12,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.shin.mynews.R
-import com.example.shin.mynews.model.News
-import com.example.shin.mynews.model.Results
+import com.example.shin.mynews.model.dataClass.News
+import com.example.shin.mynews.model.dataClass.Results
 
 import retrofit2.Callback
 
-import com.example.shin.mynews.R.id.imageView
 import com.squareup.picasso.Picasso
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
 
 
 class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsListener: Callback<News>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
@@ -29,9 +32,9 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
     }
 
     override fun onClick(view: View) {
-       when (view.id){
+        when (view.id){
 //           R.id.card_view -> newsListener.onNewsSelected(view.tag as News)
-       }
+        }
     }
 
     class ViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
@@ -45,27 +48,37 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       val viewItem = LayoutInflater.from(parent.context)
-               .inflate(R.layout.list_format, parent,false)
+        val viewItem = LayoutInflater.from(parent.context)
+                .inflate(R.layout.list_format, parent,false)
         return ViewHolder(viewItem)
     }
 
 
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-//        val format: String = "dd/mm/YYYY"
-//       var simpleDateFormat = SimpleDateFormat(format, Locale.FRANCE)
-//       var currentDate = simpleDateFormat.format(news[position].updateDate)
+
         val newsList = news[position]
+
+
 
         with(holder){
             cardView.tag = newsList
             cardView.setOnClickListener(this@NewsRecyclerViewAdapter)
-
+            /**
+             * show image in image view
+             * */
             if (newsList.multimedia?.first()?.url != null){
-                           Picasso.with(context).load(newsList.multimedia?.first()?.url).into(holder.imageNews)
+                Picasso.with(context).load(newsList.multimedia?.first()?.url).into(holder.imageNews)
             }
+            if (newsList.media?.first()?.mediaImage?.first()?.urlImage != null && newsList.multimedia?.first()?.url == null){
+                Picasso.with(context).load(newsList.media?.first()?.mediaImage?.first()?.urlImage).into(holder.imageNews)
+            }
+
+            /**
+             * verification of the presence of a subtitle and display
+             * */
 
             if (newsList.subsection == null || newsList.subsection.isEmpty()){
                 sectionView.text = newsList.section
@@ -73,7 +86,11 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
                 sectionView.text = "${newsList.section} ->  ${newsList.subsection}"
             }
 
-            dateNews.text = newsList.updateDate
+
+//            val currentDateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.FRANCE)
+//            val currentDate= currentDateFormat.parse(newsList.publishedDate)
+//            dateNews.text = currentDate?.toString()
+            dateNews.text = newsList.publishedDate
             titleNews.text = newsList.title
 
         }
