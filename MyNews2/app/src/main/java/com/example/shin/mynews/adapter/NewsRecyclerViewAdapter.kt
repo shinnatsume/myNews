@@ -66,7 +66,9 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
         with(holder){
             cardView.tag = newsList
             cardView.setOnClickListener(this@NewsRecyclerViewAdapter)
-            /**
+
+
+            /**comparaison formmat
              * show image in image view
              * */
             if (newsList.multimedia?.first()?.url != null){
@@ -87,10 +89,29 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
             }
 
 
-//            val currentDateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.FRANCE)
-//            val currentDate= currentDateFormat.parse(newsList.publishedDate)
-//            dateNews.text = currentDate?.toString()
-            dateNews.text = newsList.publishedDate
+
+            /**
+             *formatting the date according to the length
+             * */
+
+
+            val format = "dd/MM/yyyy"
+            val currentDateFormat = SimpleDateFormat(format)
+
+            if (newsList.publishedDate.length > 10){
+                val imputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                val date = imputFormat.parse(newsList.publishedDate)
+                val dateFormat = currentDateFormat.format(date)
+                dateNews.text = dateFormat.toString()
+            }else{
+                val imputFormatM = SimpleDateFormat("yyyy-MM-dd")
+                val dateM = imputFormatM.parse(newsList.publishedDate)
+                val dateFormatM = currentDateFormat.format(dateM)
+                dateNews.text = dateFormatM.toString()
+            }
+
+
+
             titleNews.text = newsList.title
 
         }

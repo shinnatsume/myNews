@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="110dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
@@ -15,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:padding="10dp">
 
             <ImageView
@@ -23,7 +23,8 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginRight="16dp" />
+
+                 />
 
 
             <TextView
@@ -32,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/image_news"
                 android:layout_toRightOf="@+id/image_news"
-                tools:text="title" />
+                tools:text="title"
+                android:layout_marginLeft="8dp"/>
 
             <TextView
                 android:id="@+id/date_news"
@@ -44,6 +46,7 @@
 
             <TextView
                 android:id="@+id/title_news"
+                android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/section_news"
@@ -53,6 +56,14 @@
                 android:maxLines="2"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pellentesque ac nisi eu lobortis. Nulla non dignissim sem, vitae rutrum nibh. Praesent lobortis finibus neque, in tincidunt enim semper quis. Praesent in augue vitae eros venenatis consequat vitae ac massa. Phasellus scelerisque posuere massa, vel consectetur quam imperdiet et. Morbi ut maximus purus. Nam nec velit ac dolor mattis bibendum. Aenean dignissim quam non faucibus placerat. Aliquam id volutpat sem. In ut viverra dolor. Vivamus vel porta nisl. Morbi odio sem, pharetra congue diam et, vulputate malesuada ex. Cras aliquam velit a ex efficitur congue. " />
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height=".5dp"
+                android:layout_marginTop="9dp"
+                android:layout_below="@+id/image_news"
+                android:layout_toRightOf="@+id/image_news"
+                 android:layout_marginLeft="8dp"
+                android:background="@color/cardview_dark_background" />
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

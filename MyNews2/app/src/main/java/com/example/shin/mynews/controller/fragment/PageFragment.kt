@@ -1,7 +1,6 @@
 package com.example.shin.mynews.controller.fragment
 
 import android.os.Bundle
-import android.support.design.widget.TabItem
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
