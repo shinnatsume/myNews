@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.shin.mynews.R
-
+import android.util.Log
 
 /**
  * A simple [Fragment] subclass.
@@ -17,11 +17,12 @@ import com.example.shin.mynews.R
 class NewsFragment : Fragment() {
 
     fun newInstance(): NewsFragment {
+
         return NewsFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_news, container, false)
     }

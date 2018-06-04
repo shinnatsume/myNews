@@ -11,15 +11,18 @@ import android.support.v4.view.ViewPager
 import com.example.shin.mynews.adapter.PageAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 
 import android.support.v4.widget.DrawerLayout
 import android.view.MenuItem
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.util.Log
 import android.view.View
 import com.example.shin.mynews.controller.fragment.NewsFragment
 import com.example.shin.mynews.controller.fragment.ParamsFragment
 import com.example.shin.mynews.controller.fragment.ProfileFragment
+
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +44,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val FRAGMENT_PROFILE = 1
     private val FRAGMENT_PARAMS = 2
 
+    //FOR TABLAYOUT
+    lateinit var tabLayout :TabLayout
+    lateinit var viewPager :ViewPager
+    lateinit var pageAdapter :PageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +62,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         this.configureNavigationView()
 
 
-        val tabLayout= findViewById<TabLayout>(R.id.tab_layout_main)
-        val viewPager = findViewById<ViewPager>(R.id.viewPager)
-        val pageAdapter =  PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount())
+        tabLayout= findViewById(R.id.tab_layout_main)
+        viewPager = findViewById(R.id.viewPager)
+        pageAdapter =  PageAdapter(supportFragmentManager)
         viewPager.adapter = pageAdapter
-
-
         tabLayout.setupWithViewPager(viewPager)
+
 
         /**
          * set title to tabitem
@@ -71,10 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         tab_layout_main.getTabAt(1)!!.setText("most popular")
         tab_layout_main.getTabAt(2)!!.setText("search")
 
-        pageFragment = PageFragment()
-        supportFragmentManager.beginTransaction()
-                .add(R.id.activity_main_frame_layout,pageFragment)
-                .commit()
+
     }
 
     override fun onBackPressed() {
@@ -87,32 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-    override  fun onNavigationItemSelected(item: MenuItem): Boolean {
 
-        // 4 - Handle Navigation Item Click
-        val id = item.getItemId()
-
-        when (id) {
-            R.id.activity_main_drawer_news -> {
-                this.showFragment(FRAGMENT_NEWS)
-
-            }
-            R.id.activity_main_drawer_profile -> {
-                this.showFragment(FRAGMENT_PROFILE)
-
-            }
-            R.id.activity_main_drawer_settings -> {
-                this.showFragment(FRAGMENT_PARAMS)
-
-            }
-            else -> {
-            }
-        }
-
-        this.drawerLayout!!.closeDrawer(GravityCompat.START)
-
-        return true
-    }
 
     // ---------------------
     // CONFIGURATION
@@ -122,8 +100,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun configureToolBar() {
         this.toolbar = findViewById<View>(R.id.activity_main_toolbar) as android.support.v7.widget.Toolbar
         setSupportActionBar(toolbar)
-        getSupportActionBar()?.setHomeButtonEnabled(true)
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setHomeButtonEnabled(true)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // 2 - Configure Drawer Layout
@@ -162,23 +140,68 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun showNewsFragment() {
         if (this.fragmentNews == null) this.fragmentNews = NewsFragment().newInstance()
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.activity_main_frame_layout, this.fragmentNews)
-                .commit()
+        this.startTransactionFragment(fragmentNews)
     }
 
+
+
     private fun showParamsFragment() {
-        if (this.fragmentParams == null) this.fragmentParams = ParamsFragment().newInstance()
-//        supportFragmentManager.beginTransaction()
-//                .add(R.id.activity_main_frame_layout,fragmentParams)
-//                .commit()
+        if (fragmentParams == null) this.fragmentParams = ParamsFragment().newInstance()
+        startTransactionFragment(fragmentParams)
+
     }
 
     private fun showProfileFragment() {
         if (this.fragmentProfile == null) this.fragmentProfile = ProfileFragment().newInstance()
-//        supportFragmentManager.beginTransaction()
-//                .add(R.id.activity_main_frame_layout,fragmentProfile)
-//                .commit()
+        this.startTransactionFragment(fragmentProfile)
+    }
+
+
+    //    // 3 - Generic method that will replace and show a fragment inside the MainActivity Frame Layout
+    private fun startTransactionFragment(fragment: Fragment?){
+
+
+        if (fragment?.isVisible != true){
+
+
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.activity_main_frame_layout, fragment).commit()
+
+
+            Log.i("iam","iam here  ${fragment?.isVisible}")
+        }
+    }
+
+    override  fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        // 4 - Handle Navigation Item Click
+        val id = item.getItemId()
+
+        when (id) {
+            R.id.activity_main_drawer_news -> {
+                this.showFragment(FRAGMENT_NEWS)
+
+
+            }
+            R.id.activity_main_drawer_profile -> {
+                this.showFragment(FRAGMENT_PROFILE)
+
+            }
+            R.id.activity_main_drawer_settings -> {
+                this.showFragment(FRAGMENT_PARAMS)
+
+            }
+            else -> {
+                this.pageFragment = PageFragment()
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.activity_main_frame_layout,pageFragment)
+                        .commit()
+            }
+        }
+
+        this.drawerLayout!!.closeDrawer(GravityCompat.START)
+
+        return true
     }
 
 }

@@ -71,10 +71,10 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
             /**comparaison formmat
              * show image in image view
              * */
-            if (newsList.multimedia?.first()?.url != null){
+            if (newsList?.multimedia != null && !newsList?.multimedia.isEmpty()){
                 Picasso.with(context).load(newsList.multimedia?.first()?.url).into(holder.imageNews)
             }
-            if (newsList.media?.first()?.mediaImage?.first()?.urlImage != null && newsList.multimedia?.first()?.url == null){
+            if (newsList?.media?.first()?.mediaImage?.first()?.urlImage != null && newsList.multimedia?.first()?.url == null){
                 Picasso.with(context).load(newsList.media?.first()?.mediaImage?.first()?.urlImage).into(holder.imageNews)
             }
 

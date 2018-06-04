@@ -6,42 +6,22 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.example.shin.mynews.controller.fragment.PageFragment
 
 
-// class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-//
-//      var numOfTabs: Int? = null
-//
-//    fun PageAdapter(fm: FragmentManager, numOfTabs: Int) {
-//        super.onCreate(fm)
-//        this.numOfTabs = numOfTabs
-//    }
-//
-//    override fun getItem(position: Int): Fragment? {
-//        when(position)
-//        {
-//            0 -> return PageFragment.newInctance(position)
-//            1 -> return PageFragment.newInctance(position)
-//            2 -> return PageFragment.newInctance(position)
-//
-//        }
-//        return null
-//    }
-//
-//    override fun getCount(): Int {
-//        return numOfTabs!!
-//    }
-//}
-class PageAdapter internal constructor(fm: FragmentManager, private val numOfTabs: Int) : FragmentPagerAdapter(fm) {
+ class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+
 
     override fun getItem(position: Int): Fragment? {
-        when (position) {
+        when(position)
+        {
             0 -> return PageFragment.newInctance(position)
             1 -> return PageFragment.newInctance(position)
             2 -> return PageFragment.newInctance(position)
-            else -> return null
+
         }
+        return null
     }
 
     override fun getCount(): Int {
-        return numOfTabs
+        return 3
     }
 }
