@@ -1,12 +1,13 @@
 package com.example.shin.mynews.controller.activity
 
 
+import android.content.Intent
+import android.content.res.Resources
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 
 import com.example.shin.mynews.R
-import com.example.shin.mynews.controller.fragment.PageFragment
 import android.support.v4.view.ViewPager
 import com.example.shin.mynews.adapter.PageAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,31 +19,32 @@ import android.view.MenuItem
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
+import android.view.Menu
 import android.view.View
-import com.example.shin.mynews.controller.fragment.NewsFragment
-import com.example.shin.mynews.controller.fragment.ParamsFragment
-import com.example.shin.mynews.controller.fragment.ProfileFragment
-
+import com.example.shin.mynews.controller.fragment.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var pageFragment: PageFragment
     //FOR DESIGN
-    private var toolbar: android.support.v7.widget.Toolbar? = null
-    private var drawerLayout: DrawerLayout? = null
-    private var navigationView: NavigationView? = null
-    //FOR FRAGMENTS
-    // 1 - Declare fragment handled by Navigation Drawer
-    private var fragmentNews: NewsFragment? = null
-    private var fragmentProfile: ProfileFragment? = null
-    private var fragmentParams: ParamsFragment? = null
+    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+
+
 
     //FOR DATAS
-    // 2 - Identify each fragment with a number
-    private val FRAGMENT_NEWS = 0
-    private val FRAGMENT_PROFILE = 1
-    private val FRAGMENT_PARAMS = 2
+    // 1 - Identify each fragment menu DRAWER with a number
+    private val FRAGMENT_NEWS = 1
+    private val FRAGMENT_PROFILE = 2
+    private val FRAGMENT_PARAMS = 3
+    // 2 - Identify each fragment menu TOOLBAR with a number
+    private val FRAGMENT_SEARCH = 4
+    private val FRAGMENT_NOTIFICATION = 5
+    private val FRAGMENT_HELP = 6
+    private val FRAGMENT_ABOUT = 7
+
 
     //FOR TABLAYOUT
     lateinit var tabLayout :TabLayout
@@ -53,21 +55,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 6 - Configure all views
-
-        this.configureToolBar()
-
-        this.configureDrawerLayout()
-
-        this.configureNavigationView()
 
 
+        toolbar = findViewById(R.id.toolbar)
         tabLayout= findViewById(R.id.tab_layout_main)
         viewPager = findViewById(R.id.viewPager)
         pageAdapter =  PageAdapter(supportFragmentManager)
         viewPager.adapter = pageAdapter
         tabLayout.setupWithViewPager(viewPager)
 
+
+
+        // 6 - Configure all views
+
+        this.configureToolBar()
+
+
+
+        this.configureDrawerLayout()
+
+        this.configureNavigationView()
 
         /**
          * set title to tabitem
@@ -98,10 +105,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     // 1 - Configure Toolbar
     private fun configureToolBar() {
-        this.toolbar = findViewById<View>(R.id.activity_main_toolbar) as android.support.v7.widget.Toolbar
+        this.toolbar = findViewById<View>(R.id.toolbar) as android.support.v7.widget.Toolbar
         setSupportActionBar(toolbar)
-//        supportActionBar?.setHomeButtonEnabled(true)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setTitleTextColor(resources.getColor(R.color.title))
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_main_menu_toolbar,menu)
+        return true
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.menu_activity_main_search -> this.addIdForIntent(FRAGMENT_SEARCH)
+            R.id.menu_activity_main_notification -> this.addIdForIntent(FRAGMENT_NOTIFICATION)
+            R.id.menu_activity_main_help -> this.addIdForIntent(FRAGMENT_HELP)
+            R.id.menu_activity_main_about -> this.addIdForIntent(FRAGMENT_ABOUT)
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     // 2 - Configure Drawer Layout
@@ -122,55 +148,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // FRAGMENTS
     // ---------------------
 
-    // 5 - Show fragment according an Identifier
+    //put id in intent Extra and go tu detail activity
 
-    private fun showFragment(fragmentIdentifier: Int) {
-        when (fragmentIdentifier) {
-            FRAGMENT_NEWS -> this.showNewsFragment()
-            FRAGMENT_PROFILE -> this.showProfileFragment()
-            FRAGMENT_PARAMS -> this.showParamsFragment()
-            else -> {
-            }
+    private  fun addIdForIntent(idFragmentForIntent: Int){
+      val  intent = Intent(this,DetailActivity::class.java)
+        when(idFragmentForIntent){
+            1->intent.putExtra("id_fragment",1)
+            2->intent.putExtra("id_fragment",2)
+            3->intent.putExtra("id_fragment",3)
+            4->intent.putExtra("id_fragment",4)
+            5->intent.putExtra("id_fragment",5)
+            6->intent.putExtra("id_fragment",6)
+            7->intent.putExtra("id_fragment",7)
+
         }
+        startActivity(intent)
     }
+
+
 
     // ---
 
     // 4 - Create each fragment page and show it
 
-    private fun showNewsFragment() {
-        if (this.fragmentNews == null) this.fragmentNews = NewsFragment().newInstance()
-        this.startTransactionFragment(fragmentNews)
-    }
 
-
-
-    private fun showParamsFragment() {
-        if (fragmentParams == null) this.fragmentParams = ParamsFragment().newInstance()
-        startTransactionFragment(fragmentParams)
-
-    }
-
-    private fun showProfileFragment() {
-        if (this.fragmentProfile == null) this.fragmentProfile = ProfileFragment().newInstance()
-        this.startTransactionFragment(fragmentProfile)
-    }
-
-
-    //    // 3 - Generic method that will replace and show a fragment inside the MainActivity Frame Layout
-    private fun startTransactionFragment(fragment: Fragment?){
-
-
-        if (fragment?.isVisible != true){
-
-
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.activity_main_frame_layout, fragment).commit()
-
-
-            Log.i("iam","iam here  ${fragment?.isVisible}")
-        }
-    }
 
     override  fun onNavigationItemSelected(item: MenuItem): Boolean {
 
@@ -179,19 +180,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when (id) {
             R.id.activity_main_drawer_news -> {
-                this.showFragment(FRAGMENT_NEWS)
+                this.addIdForIntent(FRAGMENT_NEWS)
 
 
             }
             R.id.activity_main_drawer_profile -> {
-                this.showFragment(FRAGMENT_PROFILE)
+                this.addIdForIntent(FRAGMENT_PROFILE)
 
             }
             R.id.activity_main_drawer_settings -> {
-                this.showFragment(FRAGMENT_PARAMS)
+                this.addIdForIntent(FRAGMENT_PARAMS)
 
             }
             else -> {
+
                 this.pageFragment = PageFragment()
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.activity_main_frame_layout,pageFragment)

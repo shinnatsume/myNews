@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EDD9CF"
     tools:context=".controller.fragment.SearchAndNotificationFragment">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:layout_marginLeft="16dp">
+        >
+
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/Search"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-
             android:layout_alignParentTop="true"
             android:text="Search query term" />
 
@@ -117,7 +119,7 @@
             android:text="SEARCH" />
 
         <Switch
-            android:id="@+id/notification"
+            android:id="@+id/notification_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -127,4 +129,4 @@
 
     </RelativeLayout>
 
-</FrameLayout>
+</LinearLayout>
