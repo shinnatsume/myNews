@@ -92,40 +92,40 @@ class DetailActivity : AppCompatActivity() {
     private fun showSearchFragment(){
 
         val ID_SEARCH_FRAGMENT = 0
-        if (this.fragmentSearch == null) this.fragmentSearch = SearchAndNotificationFragment().newInstance(ID_SEARCH_FRAGMENT) as SearchAndNotificationFragment
+        this.fragmentSearch = SearchAndNotificationFragment().newInstance(ID_SEARCH_FRAGMENT) as SearchAndNotificationFragment
         this.startTransactionFragment(fragmentSearch)
     }
     private fun showNotificationFragment(){
         val ID_SEARCH_FRAGMENT = 1
-        if (this.fragmentSearch == null) this.fragmentSearch = SearchAndNotificationFragment().newInstance(ID_SEARCH_FRAGMENT) as SearchAndNotificationFragment
+        this.fragmentSearch = SearchAndNotificationFragment().newInstance(ID_SEARCH_FRAGMENT) as SearchAndNotificationFragment
         this.startTransactionFragment(fragmentSearch)
     }
 
     private fun showNewsFragment() {
-        if (this.fragmentNews == null) this.fragmentNews = NewsFragment().newInstance()
+       this.fragmentNews = NewsFragment().newInstance()
         this.startTransactionFragment(fragmentNews)
     }
 
 
 
     private fun showParamsFragment() {
-        if (fragmentParams == null) this.fragmentParams = ParamsFragment().newInstance()
+         this.fragmentParams = ParamsFragment().newInstance()
         startTransactionFragment(fragmentParams)
 
     }
 
     private fun showProfileFragment() {
-        if (this.fragmentProfile == null) this.fragmentProfile = ProfileFragment().newInstance()
+         this.fragmentProfile = ProfileFragment().newInstance()
         this.startTransactionFragment(fragmentProfile)
     }
 
     private fun showAboutFragment() {
-        if (this.fragmentProfile == null) this.fragmentProfile = ProfileFragment().newInstance()
+         this.fragmentProfile = ProfileFragment().newInstance()
         this.startTransactionFragment(fragmentProfile)
     }
 
     private fun showHelpFragment() {
-        if (this.fragmentProfile == null) this.fragmentProfile = ProfileFragment().newInstance()
+       this.fragmentProfile = ProfileFragment().newInstance()
         this.startTransactionFragment(fragmentProfile)
     }
 
