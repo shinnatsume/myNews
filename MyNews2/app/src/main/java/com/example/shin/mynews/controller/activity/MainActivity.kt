@@ -22,6 +22,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import com.example.shin.mynews.controller.fragment.*
+import kotlinx.android.synthetic.main.activity_main_nav_header.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -46,6 +47,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val FRAGMENT_ABOUT = 7
 
 
+    lateinit var checkboxData :String
+    lateinit var beguinDate : String
+    lateinit var endDate :String
+    lateinit  var textSearch :String
+
     //FOR TABLAYOUT
     lateinit var tabLayout :TabLayout
     lateinit var viewPager :ViewPager
@@ -54,8 +60,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
         toolbar = findViewById(R.id.toolbar)
         tabLayout= findViewById(R.id.tab_layout_main)
@@ -82,7 +86,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         tab_layout_main.getTabAt(0)!!.setText("top stories")
         tab_layout_main.getTabAt(1)!!.setText("most popular")
-        tab_layout_main.getTabAt(2)!!.setText("search")
+        tab_layout_main.getTabAt(2)!!.setText("result of search")
+
+        /**
+         * when come back from search fragment need to see the result of search in the tab result of search
+         * */
+        if (intent.getIntExtra("id_tab",0) ==2 && intent.getStringExtra("checkbox data")!= null&& intent.getStringExtra("begin date")!= null
+                && intent.getStringExtra("end date")!= null&& intent.getStringExtra("search")!= null){
+            tabLayout.getTabAt(2)!!.select()
+            checkboxData = intent.getStringExtra("checkbox data").toString()
+            beguinDate = intent.getStringExtra("begin date").toString()
+            endDate = intent.getStringExtra("end date").toString()
+            textSearch = intent.getStringExtra("search").toString()
+            pageAdapter.getSearchFragment(2,checkboxData,beguinDate,endDate,textSearch)
+        }
+
+
+
 
 
     }
@@ -133,6 +153,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // 2 - Configure Drawer Layout
     private fun configureDrawerLayout() {
         this.drawerLayout = findViewById<View>(R.id.activity_main_drawer_layout) as DrawerLayout
+
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout!!.addDrawerListener(toggle)
         toggle.syncState()
@@ -179,24 +200,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val id = item.getItemId()
 
         when (id) {
-            R.id.activity_main_drawer_news -> {
-                this.addIdForIntent(FRAGMENT_NEWS)
-
+            R.id.activity_main_drawer_top_stories -> {
+                tabLayout.getTabAt(0)!!.select()
 
             }
             R.id.activity_main_drawer_profile -> {
                 this.addIdForIntent(FRAGMENT_PROFILE)
 
             }
-            R.id.activity_main_drawer_settings -> {
-                this.addIdForIntent(FRAGMENT_PARAMS)
-
+            R.id.activity_main_drawer_most_popular -> {
+                tabLayout.getTabAt(1)!!.select()
             }
             else -> {
 
                 this.pageFragment = PageFragment()
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.activity_main_frame_layout,pageFragment)
+                        .add(R.id.activity_main_frame_layout,pageFragment)
                         .commit()
             }
         }

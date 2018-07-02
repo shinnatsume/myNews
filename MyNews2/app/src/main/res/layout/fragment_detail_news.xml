@@ -4,65 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#EDD9CF"
-    tools:context=".controller.fragment.DetailNewsFragment">
+    tools:context=".controller.fragment.DetailNewsFragment"
+    android:layout_margin="16dp">
 
 
+        <TextView
+            android:id="@+id/detail_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        <TextView
+            android:id="@+id/title_detail_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/image_detail_news"
             android:layout_width="match_parent"
-            android:layout_height="141dp"
-
-            android:layout_alignParentTop="true"
+            android:layout_height="300dp"
             android:layout_marginTop="0dp"
             />
 
+
+
+
+
+
+
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="160dp"
+            android:id="@+id/detail_url"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:layout_below="@+id/imageView"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-
-            android:layout_below="@+id/imageView"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="350dp"
-            android:layout_height="37dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="169dp"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="341dp"
-            android:layout_height="187dp"
-            android:layout_below="@+id/textView5"
+            android:autoLink="web"
             android:layout_centerHorizontal="true"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="341dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView6"
-            android:layout_centerHorizontal="true"
-            android:text="TextView" />
-    </RelativeLayout>
 
 </LinearLayout>

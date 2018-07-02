@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment
 import android.view.View
 import com.example.shin.mynews.R
 import com.example.shin.mynews.controller.fragment.*
+import com.example.shin.mynews.model.dataClass.News
+import com.example.shin.mynews.model.dataClass.Results
 
 class DetailActivity : AppCompatActivity() {
 
@@ -13,13 +15,14 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var toolbar: android.support.v7.widget.Toolbar
     //FOR FRAGMENTS
 
-    private lateinit var fragmentNews: NewsFragment
+
     private lateinit var fragmentProfile: ProfileFragment
-    private lateinit var fragmentParams: ParamsFragment
+
     private lateinit var fragmentSearch: SearchAndNotificationFragment
     private lateinit var fragmentHelp: HelpFragment
     private lateinit var fragmentAbout: AboutFragment
-
+    private lateinit var fragmentDetailNews: DetailNewsFragment
+    private  lateinit var news: Results
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -29,29 +32,24 @@ class DetailActivity : AppCompatActivity() {
         this.configureToolBar()
 
         //1 init fragment
-        fragmentNews = NewsFragment()
-        fragmentParams = ParamsFragment()
+
         fragmentProfile = ProfileFragment()
         fragmentSearch = SearchAndNotificationFragment()
         fragmentAbout = AboutFragment()
         fragmentHelp = HelpFragment()
+        fragmentDetailNews = DetailNewsFragment()
 
         val   ARGS_ID_FRAGMENT = intent.getIntExtra("id_fragment",0)
 
-        when(ARGS_ID_FRAGMENT){
-            1->{
-                this.showNewsFragment()
-                toolbar.setTitle("news")
-            }
+
+                when(ARGS_ID_FRAGMENT){
+
 
             2->{
                 this.showProfileFragment()
                 toolbar.setTitle("profile")
             }
-            3->{
-                this.showParamsFragment()
-                toolbar.setTitle("parametre")
-            }
+
             4->{
                 this.showSearchFragment()
                 toolbar.setTitle("search")
@@ -67,6 +65,9 @@ class DetailActivity : AppCompatActivity() {
             7->{
                 this.showAboutFragment()
                 toolbar.setTitle("about")
+            }8->{
+                this.showDetailNewsFragment()
+                toolbar.setTitle("detail news")
             }
 
         }
@@ -101,18 +102,7 @@ class DetailActivity : AppCompatActivity() {
         this.startTransactionFragment(fragmentSearch)
     }
 
-    private fun showNewsFragment() {
-       this.fragmentNews = NewsFragment().newInstance()
-        this.startTransactionFragment(fragmentNews)
-    }
 
-
-
-    private fun showParamsFragment() {
-         this.fragmentParams = ParamsFragment().newInstance()
-        startTransactionFragment(fragmentParams)
-
-    }
 
     private fun showProfileFragment() {
          this.fragmentProfile = ProfileFragment().newInstance()
@@ -120,17 +110,23 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showAboutFragment() {
-         this.fragmentProfile = ProfileFragment().newInstance()
-        this.startTransactionFragment(fragmentProfile)
+         this.fragmentAbout = AboutFragment().newInstance()
+        this.startTransactionFragment(fragmentAbout)
     }
 
     private fun showHelpFragment() {
-       this.fragmentProfile = ProfileFragment().newInstance()
-        this.startTransactionFragment(fragmentProfile)
+       this.fragmentHelp = HelpFragment().newInstance()
+        this.startTransactionFragment(fragmentHelp)
+    }
+
+    private fun showDetailNewsFragment() {
+        news = intent.getSerializableExtra("news") as Results
+       this.fragmentDetailNews = DetailNewsFragment().newInstance(news)
+        this.startTransactionFragment(fragmentDetailNews)
     }
 
 
-    // 3 - Generic method that will replace and show a fragment inside the MainActivity Frame Layout
+    // 3 - Generic method that will replace and show a fragment inside the detailActivity Frame Layout
     fun startTransactionFragment(fragment: Fragment?){
 
 

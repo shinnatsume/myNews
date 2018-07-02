@@ -9,6 +9,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="1: in your profile you can add your name
+2: in your profile you can choose the hours for yours notification
+3: if the tabs result of search is empty it's because you don't make search
+4: to activate notification please select one or more of subject and turn on switch button
+5: select one news to have details and show the link to the news"  />
 
 </FrameLayout>

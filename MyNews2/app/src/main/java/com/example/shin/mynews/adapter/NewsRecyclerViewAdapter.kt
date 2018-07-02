@@ -3,6 +3,9 @@ package com.example.shin.mynews.adapter
 
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -12,30 +15,24 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.shin.mynews.R
+import com.example.shin.mynews.controller.activity.DetailActivity
 import com.example.shin.mynews.model.dataClass.News
 import com.example.shin.mynews.model.dataClass.Results
 
 import retrofit2.Callback
 
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.list_format.view.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
 
-class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsListener: Callback<News>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>(), View.OnClickListener {
+class NewsRecyclerViewAdapter(private val news: List<Results>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>() {
 
 
-    interface NewsItemListener{
-        fun onNewsSelected(news: News)
-    }
 
-    override fun onClick(view: View) {
-        when (view.id){
-//           R.id.card_view -> newsListener.onNewsSelected(view.tag as News)
-        }
-    }
 
     class ViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
         val context = itemView.context
@@ -65,7 +62,12 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
 
         with(holder){
             cardView.tag = newsList
-            cardView.setOnClickListener(this@NewsRecyclerViewAdapter)
+            cardView.setOnClickListener {
+                val intent  = Intent ( context, DetailActivity::class.java)
+                intent.putExtra("news",newsList)
+                intent.putExtra("id_fragment",8)
+                this.context.startActivity(intent)
+            }
 
 
             /**comparaison formmat
@@ -123,6 +125,9 @@ class NewsRecyclerViewAdapter(private val news: List<Results>, private val newsL
     override fun getItemCount(): Int {
         Log.i("onBindViewHolder","onBindViewHolder ${news.size}")
         return news.size
+    }
+     fun  getNewsPosition(position: Int): Results {
+        return this.news.get(position)
     }
 }
 

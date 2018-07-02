@@ -13,22 +13,24 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/activity_main_drawer_news"
-            android:icon="@android:drawable/ic_lock_power_off"
-            android:title="Fil d'actualité" />
+            android:id="@+id/activity_main_drawer_profile"
+            android:icon="@android:drawable/btn_plus"
+            android:title="Profil" />
     </group>
 
-    <item android:title="Configuration">
+    <item android:title="News">
         <menu>
             <group android:checkableBehavior="single">
+
                 <item
-                    android:id="@+id/activity_main_drawer_profile"
-                    android:icon="@android:drawable/btn_plus"
-                    android:title="Profil" />
+                    android:id="@+id/activity_main_drawer_top_stories"
+                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:title="top stories" />
                 <item
-                    android:id="@+id/activity_main_drawer_settings"
-                    android:icon="@android:drawable/btn_star_big_on"
-                    android:title="Paramètres" />
+                    android:id="@+id/activity_main_drawer_most_popular"
+                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:title="most Popular" />
+
             </group>
         </menu>
     </item>

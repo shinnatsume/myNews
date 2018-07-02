@@ -10,12 +10,12 @@
 
 
 
-    <android.support.v7.widget.AppCompatEditText
+    <EditText
         android:id="@+id/Search"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="16dp"
-        android:text="Search query term" />
+        tools:text="Search query term" />
     <LinearLayout
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -126,7 +126,7 @@
             android:id="@+id/Search_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
+            android:background="@color/colorAccent"
             android:textColor="#ffffff"
             android:text="SEARCH" />
 
