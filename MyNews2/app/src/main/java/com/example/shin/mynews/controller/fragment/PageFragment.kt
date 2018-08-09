@@ -30,7 +30,7 @@ class PageFragment: Fragment(){
     val DATA_END_DATE = "END_DATE"
     val DATA_TEXT_SEARCH ="TEXT_SEARCH"
 
-    lateinit var receiver :BroadcastReceiver
+
 
     var recyclerView: RecyclerView? = null
     lateinit var adapterNews: NewsRecyclerViewAdapter

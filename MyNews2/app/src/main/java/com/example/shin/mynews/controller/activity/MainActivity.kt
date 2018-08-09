@@ -2,27 +2,22 @@ package com.example.shin.mynews.controller.activity
 
 
 import android.content.Intent
-import android.content.res.Resources
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-
 import com.example.shin.mynews.R
 import android.support.v4.view.ViewPager
 import com.example.shin.mynews.adapter.PageAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-
 import android.support.v4.widget.DrawerLayout
 import android.view.MenuItem
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import com.example.shin.mynews.controller.fragment.*
-import kotlinx.android.synthetic.main.activity_main_nav_header.*
+
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -37,9 +32,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     //FOR DATAS
     // 1 - Identify each fragment menu DRAWER with a number
-    private val FRAGMENT_NEWS = 1
+
     private val FRAGMENT_PROFILE = 2
-    private val FRAGMENT_PARAMS = 3
+
     // 2 - Identify each fragment menu TOOLBAR with a number
     private val FRAGMENT_SEARCH = 4
     private val FRAGMENT_NOTIFICATION = 5

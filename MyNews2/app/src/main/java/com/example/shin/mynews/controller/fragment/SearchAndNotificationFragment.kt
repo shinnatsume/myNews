@@ -25,7 +25,9 @@ import android.widget.Toast
 import com.example.shin.mynews.R
 import com.example.shin.mynews.adapter.DocsRecyclerviewAdapter
 import com.example.shin.mynews.controller.activity.MainActivity
+import com.example.shin.mynews.model.Utils.Load
 import com.example.shin.mynews.model.Utils.MyAlarm
+import com.example.shin.mynews.model.Utils.Save
 import com.example.shin.mynews.model.connectionAndServices.Connection
 import com.example.shin.mynews.model.dataClass.ResponceSearch
 import com.google.gson.Gson
@@ -51,6 +53,8 @@ class SearchAndNotificationFragment : Fragment() {
     var CHECKBOX_DATA = ""
     val ID_FRAGMENT_OPTION = "ID_FRAGMENT_OPTION"
     var itemSelected = 0
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -64,12 +68,30 @@ class SearchAndNotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val notificationSwitchBtn = view.findViewById(R.id.notification_switch) as Switch
+
         val id_Fragment_View = this.arguments?.getSerializable(ID_FRAGMENT_OPTION)
 
+        val notificationBtn = Load(context!!).loadBoolean("notification")
+        val CHECKBOX_DATA = Load(context!!).loadString("chexbox")
+        val EDIT_TEXT_INPUT = Load(context!!).loadString("editText")
+
+
+
+        if ( notificationBtn == true) notificationSwitchBtn.isChecked= true
+
+
+        setSelectedCheckBox(art)
+        setSelectedCheckBox(sport)
+        setSelectedCheckBox(business)
+        setSelectedCheckBox(entrepreneurs)
+        setSelectedCheckBox(politics)
+        setSelectedCheckBox(travel)
 
         when (id_Fragment_View) {
             0 -> {
                 notificationSwitchBtn.visibility = View.GONE
+
+
 
             }
             1 -> {
@@ -84,12 +106,6 @@ class SearchAndNotificationFragment : Fragment() {
 
 
 
-  setSelectedCheckBox(art)
-  setSelectedCheckBox(sport)
-  setSelectedCheckBox(business)
-  setSelectedCheckBox(entrepreneurs)
-  setSelectedCheckBox(politics)
-  setSelectedCheckBox(travel)
         val format = "yyyyMMdd"
         val currentDateFormat = SimpleDateFormat(format)
         val inputFormat = SimpleDateFormat("dd/MM/yyyy")
@@ -97,42 +113,17 @@ class SearchAndNotificationFragment : Fragment() {
         notificationSwitchBtn.setOnCheckedChangeListener { buttonView, isChecked ->
 
                    if( notificationSwitchBtn.isChecked == true ){
-
-
-
-
-//                       val calendar =Calendar.getInstance()
-//                       calendar.timeInMillis
-//                       calendar.set(Calendar.HOUR_OF_DAY, 23)
                        val date = Date()
                        val begin = currentDateFormat.format(date)
-                       val call: Call<ResponceSearch> = Connection.newsServiceJson.getArticleSearch(begin,null,CHECKBOX_DATA,EDIT_TEXT_INPUT)
 
-                       call?.enqueue(object : Callback<ResponceSearch> {
+                       Save(context!!).saveString(begin,"date")
+                       Save(context!!).saveString(EDIT_TEXT_INPUT,"editText")
+                       Save(context!!).saveString(CHECKBOX_DATA,"chexbox")
+                       Save(context!!).saveBoolean(true,"notification")
 
-                           @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+                   }else {
 
-                           override fun onResponse(call: Call<ResponceSearch>?, response: Response<ResponceSearch>?) {
-
-
-                               val responceDocs = response?.body()
-                               Log.i("responce", "$responceDocs")
-                               val docs  = responceDocs?.response!!.docs
-
-
-
-
-
-
-
-
-                           }
-
-                           override fun onFailure(call: Call<ResponceSearch>?, t: Throwable?) {
-                               Log.e("t", "not connect$t")
-                           }
-
-                       })
+                       Save(context!!).saveBoolean(false,"notification")
 
                    }
                 }
@@ -160,18 +151,9 @@ class SearchAndNotificationFragment : Fragment() {
 
         if (Search.length() > 0) this.EDIT_TEXT_INPUT = Search.text.toString()
 
-
-        Log.i("receiver", "${CHECKBOX_DATA.toString()}")
-        Log.i("art", "${DATA_CHAR.toString()}")
-        Log.i("item selected", "${itemSelected.toString()}")
-
-            val mPreferences = context!!.getSharedPreferences("checkbox data",0)
+            val mPreferences = context!!.getSharedPreferences("id total search",0)
             val editor :SharedPreferences.Editor = mPreferences.edit()
-            val gson = Gson()
-            var json:String
 
-            json = gson.toJson(CHECKBOX_DATA)
-            editor.putString("checkbox data", json)
             editor.apply()
 
                 val intent = Intent(context,MainActivity::class.java)
@@ -210,13 +192,51 @@ class SearchAndNotificationFragment : Fragment() {
                 itemSelected -=1
                 DATA_CHAR = ""
             }
-            if (DATA_CHAR == "%26art") ART = DATA_CHAR else if (DATA_CHAR == "") ART= ""
-            if (DATA_CHAR == "%26business") BUSINESS = DATA_CHAR else if (DATA_CHAR == "") BUSINESS= ""
-            if (DATA_CHAR == "%26sport") SPORT = DATA_CHAR else if (DATA_CHAR == "") SPORT= ""
-            if (DATA_CHAR == "%26entrepreneurs") ENTREPRENEUR = DATA_CHAR else if (DATA_CHAR == "") ENTREPRENEUR= ""
-            if (DATA_CHAR == "%26politics") POLITICS = DATA_CHAR else if (DATA_CHAR == "")POLITICS= ""
-            if (DATA_CHAR == "%26travel") TRAVEL = DATA_CHAR else if (DATA_CHAR == "")TRAVEL= ""
+
+
+            if (DATA_CHAR == "%26art") {
+                ART = DATA_CHAR
+
+            } else if (DATA_CHAR == ""){
+                ART= ""
+
+            }
+            if (DATA_CHAR == "%26business"){
+                BUSINESS = DATA_CHAR
+
+            } else if (DATA_CHAR == ""){
+                BUSINESS= ""
+
+            }
+            if (DATA_CHAR == "%26sport"){
+                SPORT = DATA_CHAR
+
+            } else if (DATA_CHAR == "") {
+                SPORT= ""
+
+            }
+            if (DATA_CHAR == "%26entrepreneurs"){
+                ENTREPRENEUR = DATA_CHAR
+
+            } else if (DATA_CHAR == "") {
+                ENTREPRENEUR= ""
+
+            }
+            if (DATA_CHAR == "%26politics") {
+                POLITICS = DATA_CHAR
+
+            } else if (DATA_CHAR == ""){
+                POLITICS= ""
+
+            }
+            if (DATA_CHAR == "%26travel"){
+                TRAVEL = DATA_CHAR
+            } else if (DATA_CHAR == ""){
+                TRAVEL= ""
+
+            }
             CHECKBOX_DATA = ART + BUSINESS + POLITICS+ SPORT + ENTREPRENEUR + TRAVEL
+
         }
 
 

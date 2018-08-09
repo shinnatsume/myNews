@@ -1,21 +1,15 @@
 package com.example.shin.mynews.model.Utils
 
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.app.TaskStackBuilder
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
-import android.widget.Switch
 import com.example.shin.mynews.R
-import com.example.shin.mynews.R.id.notification_switch
-import com.example.shin.mynews.controller.activity.MainActivity
+import com.example.shin.mynews.controller.activity.NotificationActivity
 
 class MyNotification (context: Context){
 
@@ -41,16 +35,20 @@ class MyNotification (context: Context){
                 notificationManager.createNotificationChannel(channel)
             }
 
+            val context = context
 
+            val intent = Intent(context, NotificationActivity::class.java)
 
-            val intent = Intent(context, MainActivity::class.java)
 
             val taskBuilder = TaskStackBuilder.create(context)
-            taskBuilder.addParentStack(MainActivity::class.java)
+            taskBuilder.addParentStack(NotificationActivity::class.java)
             taskBuilder.addNextIntent(intent)
 
             val pendingIntent = taskBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-            val context = context
+
+
+
+
             val builder= NotificationCompat.Builder(context!!,"channelId")
 
             builder.setAutoCancel(true)

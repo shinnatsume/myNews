@@ -28,7 +28,6 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         toolbar = findViewById(R.id.toolbar)
-
         this.configureToolBar()
 
         //1 init fragment
