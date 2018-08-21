@@ -13,7 +13,6 @@ import com.example.shin.mynews.model.dataClass.Doc
 
 class DocsRecyclerviewAdapter(private val docs:List<Doc>): RecyclerView.Adapter<DocsRecyclerviewAdapter.ViewHolder>() {
 
-
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
         val context = itemView.context
         val titleDocs = itemView.findViewById<TextView>(R.id.snippet_docs)
@@ -21,31 +20,23 @@ class DocsRecyclerviewAdapter(private val docs:List<Doc>): RecyclerView.Adapter<
         val cardView = itemView.findViewById<CardView>(R.id.card_view_search)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
         val viewItem = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_docs, parent,false)
         return DocsRecyclerviewAdapter.ViewHolder(viewItem)
     }
 
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val docsList = docs[position]
 
         with(holder){
             cardView.tag = docsList
-
             urlDocs.text = docsList.urlArticle
             titleDocs.text = docsList.snippet
         }
-
-
     }
 
     override fun getItemCount(): Int {
-
         return docs.size
-
     }
 }

@@ -33,13 +33,11 @@ class NotificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
 
-    toolbar = findViewById(R.id.toolbar)
-    toolbar.setTitle("News notification")
-    this.configureToolBar()
+        toolbar = findViewById(R.id.toolbar)
+        toolbar.setTitle("News notification")
+        this.configureToolBar()
 
         val context : Context = this
-
-
 
         val CHECKBOX_DATA = Load(context!!).loadString("chexbox")
         val begin =Load(context!!).loadString("date")
@@ -50,26 +48,17 @@ class NotificationActivity : AppCompatActivity() {
         call?.enqueue(object : Callback<ResponceSearch> {
 
             @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-
             override fun onResponse(call: Call<ResponceSearch>?, response: Response<ResponceSearch>?) {
-
-
-
                 val responceDocs = response?.body()
                 Log.i("responce", "$responceDocs")
                 docs  = responceDocs?.response!!.docs
-
                 recyclerViewNotification!!.layoutManager = LinearLayoutManager(context)
-
-
                 var   adapterDocs = DocsRecyclerviewAdapter( docs)
                 recyclerViewNotification!!.adapter = adapterDocs
             }
-
             override fun onFailure(call: Call<ResponceSearch>?, t: Throwable?) {
                 Log.e("t", "not connect$t")
             }
-
         })
     }
 
@@ -80,26 +69,21 @@ class NotificationActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(resources.getColor(R.color.title))
         actionBar!!.setDisplayShowTitleEnabled(true)
         actionBar!!.setDisplayHomeAsUpEnabled(true)
-
-
     }
 
 
     override fun
-             onOptionsItemSelected( item: MenuItem): Boolean {
-
-    when (item.getItemId()) {
-         android.R.id.home->{
-             // todo: goto back activity from here
-             intent   = Intent(this, MainActivity::class.java)
-             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP )
-             startActivity(intent)
-         return true
-         }
-
-
-    }
+            onOptionsItemSelected( item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home->{
+                // todo: goto back activity from here
+                intent   = Intent(this, MainActivity::class.java)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP )
+                startActivity(intent)
+                return true
+            }
+        }
         return false
-}
+    }
 
 }

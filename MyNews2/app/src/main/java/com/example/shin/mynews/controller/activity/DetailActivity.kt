@@ -17,7 +17,6 @@ class DetailActivity : AppCompatActivity() {
 
 
     private lateinit var fragmentProfile: ProfileFragment
-
     private lateinit var fragmentSearch: SearchAndNotificationFragment
     private lateinit var fragmentHelp: HelpFragment
     private lateinit var fragmentAbout: AboutFragment
@@ -40,15 +39,11 @@ class DetailActivity : AppCompatActivity() {
 
         val   ARGS_ID_FRAGMENT = intent.getIntExtra("id_fragment",0)
 
-
-                when(ARGS_ID_FRAGMENT){
-
-
+        when(ARGS_ID_FRAGMENT){
             2->{
                 this.showProfileFragment()
                 toolbar.setTitle("profile")
             }
-
             4->{
                 this.showSearchFragment()
                 toolbar.setTitle("search")
@@ -65,10 +60,9 @@ class DetailActivity : AppCompatActivity() {
                 this.showAboutFragment()
                 toolbar.setTitle("about")
             }8->{
-                this.showDetailNewsFragment()
-                toolbar.setTitle("detail news")
-            }
-
+            this.showDetailNewsFragment()
+            toolbar.setTitle("detail news")
+        }
         }
     }
 
@@ -104,23 +98,23 @@ class DetailActivity : AppCompatActivity() {
 
 
     private fun showProfileFragment() {
-         this.fragmentProfile = ProfileFragment().newInstance()
+        this.fragmentProfile = ProfileFragment().newInstance()
         this.startTransactionFragment(fragmentProfile)
     }
 
     private fun showAboutFragment() {
-         this.fragmentAbout = AboutFragment().newInstance()
+        this.fragmentAbout = AboutFragment().newInstance()
         this.startTransactionFragment(fragmentAbout)
     }
 
     private fun showHelpFragment() {
-       this.fragmentHelp = HelpFragment().newInstance()
+        this.fragmentHelp = HelpFragment().newInstance()
         this.startTransactionFragment(fragmentHelp)
     }
 
     private fun showDetailNewsFragment() {
         news = intent.getSerializableExtra("news") as Results
-       this.fragmentDetailNews = DetailNewsFragment().newInstance(news)
+        this.fragmentDetailNews = DetailNewsFragment().newInstance(news)
         this.startTransactionFragment(fragmentDetailNews)
     }
 
@@ -130,15 +124,10 @@ class DetailActivity : AppCompatActivity() {
 
 
         if (fragment?.isVisible != true){
-
             val fm = supportFragmentManager.beginTransaction()
             fm.replace(R.id.activity_detail_frame_layout, fragment)
             fm.isAddToBackStackAllowed
             fm.commit()
-
-
-
         }
     }
-
 }

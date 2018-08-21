@@ -52,38 +52,30 @@ class ProfileFragment : Fragment() {
         val intent = Intent(context,MainActivity::class.java)
         if (nameText.text != null ){
             validateNameBtn.setOnClickListener {
-
-                 ProfileName =  nameText.text.toString()
-//                name_profile.text = ProfileName
-//                intent.putExtra("nameProfile",ProfileName)
-//                startActivity(intent)
+                ProfileName =  nameText.text.toString()
             }
         }
         validateHoursBtn.setOnClickListener {
 
-          var  hoursToGetNotification  = hours.currentHour
-          var  minToGetNotification = hours.currentMinute
+            var  hoursToGetNotification  = hours.currentHour
+            var  minToGetNotification = hours.currentMinute
             val calendar = Calendar.getInstance()
             if (android.os.Build.VERSION.SDK_INT >= 23){
                 calendar.set(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH,hoursToGetNotification,minToGetNotification,0)
             }
-                setAlarm(calendar.timeInMillis)
+            setAlarm(calendar.timeInMillis)
 
             intent.putExtra("hours", hoursToGetNotification)
             intent.putExtra("min",minToGetNotification)
             startActivity(intent)
-
         }
-
-
-
     }
 
 
     fun setAlarm(long: Long){
-     val   alarmManager :AlarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-      val  intent = Intent(context,MyAlarm::class.java)
-       val pendingIntent =  PendingIntent.getBroadcast(context,0, intent, 0)
+        val   alarmManager :AlarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val  intent = Intent(context,MyAlarm::class.java)
+        val pendingIntent =  PendingIntent.getBroadcast(context,0, intent, 0)
         alarmManager.setRepeating(AlarmManager.RTC, long,AlarmManager.INTERVAL_DAY,pendingIntent)
     }
 

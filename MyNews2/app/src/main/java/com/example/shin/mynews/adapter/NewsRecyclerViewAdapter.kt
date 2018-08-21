@@ -31,9 +31,6 @@ import java.util.*
 
 class NewsRecyclerViewAdapter(private val news: List<Results>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.ViewHolder>() {
 
-
-
-
     class ViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
         val context = itemView.context
         val cardView = itemView.findViewById<CardView>(R.id.card_view) !!
@@ -54,11 +51,7 @@ class NewsRecyclerViewAdapter(private val news: List<Results>) : RecyclerView.Ad
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
         val newsList = news[position]
-
-
 
         with(holder){
             cardView.tag = newsList
@@ -68,7 +61,6 @@ class NewsRecyclerViewAdapter(private val news: List<Results>) : RecyclerView.Ad
                 intent.putExtra("id_fragment",8)
                 this.context.startActivity(intent)
             }
-
 
             /**comparaison formmat
              * show image in image view
@@ -111,22 +103,15 @@ class NewsRecyclerViewAdapter(private val news: List<Results>) : RecyclerView.Ad
                 val dateFormatM = currentDateFormat.format(dateM)
                 dateNews.text = dateFormatM.toString()
             }
-
-
-
             titleNews.text = newsList.title
-
         }
-
-
-
     }
 
     override fun getItemCount(): Int {
         Log.i("onBindViewHolder","onBindViewHolder ${news.size}")
         return news.size
     }
-     fun  getNewsPosition(position: Int): Results {
+    fun  getNewsPosition(position: Int): Results {
         return this.news.get(position)
     }
 }

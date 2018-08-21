@@ -75,10 +75,7 @@ class SearchAndNotificationFragment : Fragment() {
         val CHECKBOX_DATA = Load(context!!).loadString("chexbox")
         val EDIT_TEXT_INPUT = Load(context!!).loadString("editText")
 
-
-
         if ( notificationBtn == true) notificationSwitchBtn.isChecked= true
-
 
         setSelectedCheckBox(art)
         setSelectedCheckBox(sport)
@@ -90,9 +87,6 @@ class SearchAndNotificationFragment : Fragment() {
         when (id_Fragment_View) {
             0 -> {
                 notificationSwitchBtn.visibility = View.GONE
-
-
-
             }
             1 -> {
                 Search_btn.visibility = GONE
@@ -112,49 +106,45 @@ class SearchAndNotificationFragment : Fragment() {
 
         notificationSwitchBtn.setOnCheckedChangeListener { buttonView, isChecked ->
 
-                   if( notificationSwitchBtn.isChecked == true ){
-                       val date = Date()
-                       val begin = currentDateFormat.format(date)
+            if( notificationSwitchBtn.isChecked == true ){
+                val date = Date()
+                val begin = currentDateFormat.format(date)
 
-                       Save(context!!).saveString(begin,"date")
-                       Save(context!!).saveString(EDIT_TEXT_INPUT,"editText")
-                       Save(context!!).saveString(CHECKBOX_DATA,"chexbox")
-                       Save(context!!).saveBoolean(true,"notification")
+                Save(context!!).saveString(begin,"date")
+                Save(context!!).saveString(EDIT_TEXT_INPUT,"editText")
+                Save(context!!).saveString(CHECKBOX_DATA,"chexbox")
+                Save(context!!).saveBoolean(true,"notification")
 
-                   }else {
+            }else {
 
-                       Save(context!!).saveBoolean(false,"notification")
+                Save(context!!).saveBoolean(false,"notification")
 
-                   }
+            }
+        }
+
+
+        Search_btn.setOnClickListener {
+            if (itemSelected >=1){
+
+
+                if (begin_date_edit.length() == 10) {
+                    val date = inputFormat.parse(begin_date_edit.text.toString())
+                    BEGIN_DATE = currentDateFormat.format(date)
+                    Log.i("date", "$BEGIN_DATE")
                 }
 
+                if (end_date_edit.length() == 10){
+                    val date = inputFormat.parse(end_date_edit.text.toString())
+                    END_DATE = currentDateFormat.format(date)
+                    Log.i("date", "$END_DATE")
+                }
 
+                if (Search.length() > 0) this.EDIT_TEXT_INPUT = Search.text.toString()
 
+                val mPreferences = context!!.getSharedPreferences("id total search",0)
+                val editor :SharedPreferences.Editor = mPreferences.edit()
 
-
-
-    Search_btn.setOnClickListener {
-        if (itemSelected >=1){
-
-
-        if (begin_date_edit.length() == 10) {
-            val date = inputFormat.parse(begin_date_edit.text.toString())
-            BEGIN_DATE = currentDateFormat.format(date)
-            Log.i("date", "$BEGIN_DATE")
-        }
-
-        if (end_date_edit.length() == 10){
-            val date = inputFormat.parse(end_date_edit.text.toString())
-            END_DATE = currentDateFormat.format(date)
-            Log.i("date", "$END_DATE")
-        }
-
-        if (Search.length() > 0) this.EDIT_TEXT_INPUT = Search.text.toString()
-
-            val mPreferences = context!!.getSharedPreferences("id total search",0)
-            val editor :SharedPreferences.Editor = mPreferences.edit()
-
-            editor.apply()
+                editor.apply()
 
                 val intent = Intent(context,MainActivity::class.java)
 
@@ -165,11 +155,11 @@ class SearchAndNotificationFragment : Fragment() {
                 intent.putExtra("id_tab", 2)
                 startActivity(intent)
 
-    }else{
-            Toast.makeText(context,"please check at least one of the checkboxes if above ",Toast.LENGTH_LONG).show()
-        }
+            }else{
+                Toast.makeText(context,"please check at least one of the checkboxes if above ",Toast.LENGTH_LONG).show()
+            }
 
-    }
+        }
     }
 
 

@@ -24,10 +24,9 @@ class NotificationRecyclerViewAdapter(private val docs :List<Doc>) : RecyclerVie
 
         with(holder){
             cardView.tag = docsList
-
             urlDocs.text = docsList.urlArticle
             titleDocs.text = docsList.snippet
-    }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
@@ -37,5 +36,5 @@ class NotificationRecyclerViewAdapter(private val docs :List<Doc>) : RecyclerVie
     }
 
     override fun getItemCount(): Int {
-return docs.size    }
+        return docs.size    }
 }

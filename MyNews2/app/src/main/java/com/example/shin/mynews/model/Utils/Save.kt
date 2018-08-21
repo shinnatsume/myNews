@@ -6,9 +6,9 @@ import android.content.SharedPreferences
 class Save(context: Context) {
 
 
-    var Context = context!!
 
-    var mPref :SharedPreferences = Context.getSharedPreferences("save",0)
+
+    var mPref :SharedPreferences = context.getSharedPreferences("save",0)
     var editor : SharedPreferences.Editor = mPref.edit()
 
 

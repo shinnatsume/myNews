@@ -96,10 +96,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             pageAdapter.getSearchFragment(2,checkboxData,beguinDate,endDate,textSearch)
         }
 
-
-
-
-
     }
 
     override fun onBackPressed() {
@@ -110,8 +106,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             super.onBackPressed()
         }
     }
-
-
 
 
     // ---------------------
@@ -125,13 +119,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toolbar.setTitleTextColor(resources.getColor(R.color.title))
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_main_menu_toolbar,menu)
         return true
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -140,7 +132,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.menu_activity_main_notification -> this.addIdForIntent(FRAGMENT_NOTIFICATION)
             R.id.menu_activity_main_help -> this.addIdForIntent(FRAGMENT_HELP)
             R.id.menu_activity_main_about -> this.addIdForIntent(FRAGMENT_ABOUT)
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -148,7 +139,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // 2 - Configure Drawer Layout
     private fun configureDrawerLayout() {
         this.drawerLayout = findViewById<View>(R.id.activity_main_drawer_layout) as DrawerLayout
-
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout!!.addDrawerListener(toggle)
         toggle.syncState()
@@ -167,7 +157,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //put id in intent Extra and go tu detail activity
 
     private  fun addIdForIntent(idFragmentForIntent: Int){
-      val  intent = Intent(this,DetailActivity::class.java)
+        val  intent = Intent(this,DetailActivity::class.java)
         when(idFragmentForIntent){
             1->intent.putExtra("id_fragment",1)
             2->intent.putExtra("id_fragment",2)
@@ -176,18 +166,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             5->intent.putExtra("id_fragment",5)
             6->intent.putExtra("id_fragment",6)
             7->intent.putExtra("id_fragment",7)
-
         }
         startActivity(intent)
     }
 
-
-
-    // ---
-
     // 4 - Create each fragment page and show it
-
-
 
     override  fun onNavigationItemSelected(item: MenuItem): Boolean {
 
@@ -214,9 +197,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         .commit()
             }
         }
-
         this.drawerLayout!!.closeDrawer(GravityCompat.START)
-
         return true
     }
 
