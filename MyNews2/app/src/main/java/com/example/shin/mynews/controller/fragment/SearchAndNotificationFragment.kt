@@ -2,18 +2,10 @@ package com.example.shin.mynews.controller.fragment
 
 
 import android.annotation.SuppressLint
-import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
-import android.support.v4.app.NotificationCompat
-import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,18 +15,10 @@ import android.widget.CheckBox
 import android.widget.Switch
 import android.widget.Toast
 import com.example.shin.mynews.R
-import com.example.shin.mynews.adapter.DocsRecyclerviewAdapter
 import com.example.shin.mynews.controller.activity.MainActivity
 import com.example.shin.mynews.model.Utils.Load
-import com.example.shin.mynews.model.Utils.MyAlarm
 import com.example.shin.mynews.model.Utils.Save
-import com.example.shin.mynews.model.connectionAndServices.Connection
-import com.example.shin.mynews.model.dataClass.ResponceSearch
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_search_and_notification.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -124,7 +108,7 @@ class SearchAndNotificationFragment : Fragment() {
 
 
         Search_btn.setOnClickListener {
-            if (itemSelected >=1){
+            if (itemSelected >=1 && search_edit_text.length()>0){
 
 
                 if (begin_date_edit.length() == 10) {
@@ -139,7 +123,7 @@ class SearchAndNotificationFragment : Fragment() {
                     Log.i("date", "$END_DATE")
                 }
 
-                if (Search.length() > 0) this.EDIT_TEXT_INPUT = Search.text.toString()
+                if (search_edit_text.length() > 0) this.EDIT_TEXT_INPUT = search_edit_text.text.toString()
 
                 val mPreferences = context!!.getSharedPreferences("id total search",0)
                 val editor :SharedPreferences.Editor = mPreferences.edit()
