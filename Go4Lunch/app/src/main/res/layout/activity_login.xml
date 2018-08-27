@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical"
+    tools:context=".ui.login.LoginActivity">
+
+    <ImageView
+        android:id="@+id/Logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+         />
+
+    <TextView
+        android:id="@+id/title_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/titleApp"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        android:textColor="@color/textLogin"/>
+
+    <TextView
+        android:id="@+id/slogan_app"
+        android:textStyle="italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/slogan"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textColor="@color/textLogin"/>
+
+    <Button
+        android:id="@+id/facebook_btn_connection"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        android:text="@string/facebookConnect"
+        android:textColor="@color/textLogin"
+    android:background="@drawable/com_facebook_button_background"
+    android:drawableLeft="@drawable/com_facebook_button_icon_blue"
+    />
+
+
+    <Button
+        android:id="@+id/google_btn_connection"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="?android:attr/colorMultiSelectHighlight"
+        android:drawableLeft="@drawable/googleg_standard_color_18"
+        android:text="@string/googleConnect"
+        android:textColor="@color/textLogin"/>
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="titleApp">Go4Lunch</string>
+    <string name="facebookConnect">connection avec facebook</string>
+    <string name="googleConnect">connection avec google </string>
+    <string name="slogan">trouve un bon restaurant et invite des colegue de travail pour le dinner!</string>
+
+</resources>
