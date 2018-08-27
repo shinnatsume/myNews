@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.fragment.LevelIG"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ig_inf_20"
+            android:layout_width="match_parent"
+            android:layout_weight=".25"
+            android:background="@android:color/holo_green_dark"
+            android:orientation="horizontal"
+            android:layout_height="0dp">
+
+            <TextView
+                android:text="IG<20"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0dp"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ig_sup_20__inf_55"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".25"
+            android:orientation="horizontal"
+            android:background="@android:color/holo_orange_light">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="20>IG<55"
+                android:gravity="center"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ig_sup_55__inf_70"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".25"
+            android:orientation="horizontal"
+            android:background="@android:color/holo_orange_dark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="55>IG<70"
+                android:gravity="center"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ig_sup_70"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".25"
+            android:orientation="horizontal"
+            android:background="@android:color/holo_red_dark">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="IG>70"
+                android:gravity="center"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               />
+
+
+        </LinearLayout>
+
+    </LinearLayout>

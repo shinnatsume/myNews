@@ -36,7 +36,7 @@ import org.junit.runner.RunWith
 class ManiActivityTests {
 
     lateinit var mContext : Context
-    lateinit var fragmentSearch : Fragment
+   
 
     @Rule @JvmField
     val mActivityRule = ActivityTestRule(MainActivity::class.java)
@@ -44,10 +44,9 @@ class ManiActivityTests {
     @Before
     fun setup() {
         mActivityRule.activity.supportFragmentManager.beginTransaction().replace(R.id.activity_main_frame_layout,SearchAndNotificationFragment()).commitAllowingStateLoss()
-//       fragmentSearch = SearchAndNotificationFragment().newInstance()
-//         fragmentSearch.activity.fragmentManager.beginTransaction()
+
         this.mContext = InstrumentationRegistry.getTargetContext()
-//      var  fragmentSearch = Fragment.instantiate(mContext, onView(ViewMatchers.withId(SearchAndNotificationFragment)).toString())
+
 
     }
 
